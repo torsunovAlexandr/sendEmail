@@ -34,22 +34,22 @@ class UserSeeder extends Seeder
             [
                 'second_name'   => 'Pushkin',
                 'first_name'    => 'Alexandr',
-                'email'         => 'alexandrtorsunoff@yandex.ru',
+                'email'         => 'unicorntest1@yandex.ru',
             ],
             [
                 'second_name'   => 'Golovach',
                 'first_name'    => 'Elena',
-                'email'         => 'torsunovalexandr@gmail.com',
+                'email'         => 'unicorntest2@yandex.ru',
             ],
             [
                 'second_name'   => 'Mask',
                 'first_name'    => 'Ilon',
-                'email'         => 'IvanSecurity132@yandex.ru',
+                'email'         => 'unicorntest3@yandex.ru',
             ],
             [
                 'second_name'   => 'Kadyrov',
                 'first_name'    => 'Ramzan',
-                'email'         => 'prekrasnyj.neznakomecz.00@mail.ru',
+                'email'         => 'unicorntest4@yandex.ru',
             ],
 
         ];
