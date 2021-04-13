@@ -1,6 +1,6 @@
 В файлe .env указать:  
 
-1)В параметр MAIL_USERNAME добавить почтовый ящик с которого будет идти рассылка и в поле MAIL_PASSWORD пароль от ящика.
+1)В параметр MAIL_USERNAME добавить почтовый ящик с которого будет идти рассылка и в поле MAIL_PASSWORD пароль от ящика.<br>
 2)Настройки своей бд
 
     DB_CONNECTION=mysql
@@ -21,12 +21,15 @@
 После этого выполнить миграции командой php artisan migrate
 
 Далее наполнить бд запустив seeders
-php artisan db:seed --class=UserSeeder
-php artisan db:seed --class=UserActionsSeeder
-php artisan db:seed --class=LoginSourceSeeder
-php artisan db:seed --class=ActionsSeeder
 
-После запустить менеджер очереди командой php artisan queue:work
+    php artisan db:seed --class=UserSeeder
+    php artisan db:seed --class=UserActionsSeeder
+    php artisan db:seed --class=LoginSourceSeeder
+    php artisan db:seed --class=ActionsSeeder
+
+После запустить менеджер очереди командой 
+
+    php artisan queue:work
 
 Далее перейти по адресу localhost/sendEmail
 
