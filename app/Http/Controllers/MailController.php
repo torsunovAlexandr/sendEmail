@@ -56,15 +56,12 @@ class MailController extends Controller
     public function distributeUsersIntoGroups()
     {
         $users = $this->getUsers();
-        echo '<pre>',print_r( $users),'</pre>';
-
         $delayForSendEmail = self::SECOND_PER_DAY / count($users);
         //ввёл вторую переменную для перерасчёта в цикле
         $delay = $delayForSendEmail;
 
         //раскидывает юзеров по группам
         foreach ($users as $user) {
-            echo '<pre>',print_r( $delay),'</pre>';
             if($user->countAuthInLastMonth > 0) {
                 if ($user->authInPromotionPeriod == 0) {
                     $this->sendEmail($user, 'GroupC', $delay);
@@ -83,6 +80,7 @@ class MailController extends Controller
 
             }
         }
+        echo '<pre>',print_r( 'Сообщения отправлены'),'</pre>';
     }
 
     public function sendEmail($user, $group, $delay)
