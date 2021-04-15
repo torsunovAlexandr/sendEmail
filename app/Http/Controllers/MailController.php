@@ -12,7 +12,10 @@ use stdClass;
 class MailController extends Controller
 {
     CONST SECOND_PER_DAY = 86400;
-
+    /**
+     * Получение списка пользователей для рассылки сообщений
+     * @return array
+     */
     public function getUsers(): array
     {
         $firstDatePreviousMonth = Carbon::parse('first day of previous month')->format('Y-m-d');
@@ -39,20 +42,27 @@ class MailController extends Controller
 
         ";
 
-        return db::select(db::raw($sql), array(
+        return DB::select(DB::raw($sql), array(
             'firstDatePreviousMonth' => $firstDatePreviousMonth,
             'lastDatePreviousMonth' => $lastDatePreviousMonth,
         ));
 
     }
 
-    public function getAction()
+    /**
+     * Получение акции
+     * @return object
+     */
+    public function getAction(): object
     {
          return DB::table('actions')
             ->select('title', 'date_end')
             ->first();
     }
 
+    /**
+     * Распределение пользователей по разным группам для рассылки
+     */
     public function distributeUsersIntoGroups()
     {
         $users = $this->getUsers();
@@ -80,9 +90,12 @@ class MailController extends Controller
 
             }
         }
-        echo '<pre>',print_r( 'Сообщения отправлены'),'</pre>';
+        echo '<pre>',print_r( 'Сообщения поставлены в очередь для отправки'),'</pre>';
     }
 
+    /**
+     * Отправить сообщения пользователям
+     */
     public function sendEmail($user, $group, $delay)
     {
         $data = new stdClass();
@@ -100,7 +113,5 @@ class MailController extends Controller
         $when = Carbon::now()->addSeconds($delay);
         Mail::to($user->email)
             ->later($when,new SendEmail($data));
-        echo "Email for {$user->name} {$group} sent!!!";
     }
-
 }
